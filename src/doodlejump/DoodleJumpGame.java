@@ -15,7 +15,11 @@ public class DoodleJumpGame {
     }
 
     public void run() {
-
+        Platform platform = new Platform();
+        Character character = new Character();
+        canvas.add(platform);
+        canvas.add(character);
+        canvas.draw();
     }
 
     public static void main(String[] args) {
