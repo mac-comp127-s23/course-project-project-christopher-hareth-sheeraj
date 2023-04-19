@@ -6,8 +6,14 @@ public class Platform extends Image{
 
     private static String IMAGE_PATH = "platform_test.png";
 
-    public Platform() {
-        super(0, 0, IMAGE_PATH);
+    public Platform(double centerX, double centerY) {
+        super(IMAGE_PATH);
+        setCenter(centerX, centerY);
+    }
+
+    @Override
+    public String toString() {
+        return "A platform.";
     }
     
 }
