@@ -7,7 +7,7 @@ import edu.macalester.graphics.Point;
 public class Character extends Image{
     
     private static final double GRAVITY = 9.8;
-    private static final double STARTING_VELOCITY = 50;
+    private static final double STARTING_VELOCITY = 65;
 
     private static String IMAGE_PATH = "character_test.png";
     
@@ -68,6 +68,10 @@ public class Character extends Image{
     public void resetVelocity() {
         currentVelocity = STARTING_VELOCITY;
         falling = false;
+    }
+
+    public boolean checkIfAtBottom() {
+        return bottomLeft.getY() >= canvas.getHeight();
     }
 
     private void updateCharacterPos() {
