@@ -53,10 +53,12 @@ public class Character extends Image{
 
     public Point checkForPlatforms() {
         if (falling) {
-            if (canvas.getElementAt(bottomLeft) != null) {
+            if (canvas.getElementAt(bottomLeft) != null && 
+                canvas.getElementAt(bottomLeft) instanceof Platform) {
                 return bottomLeft;
             }
-            else if (canvas.getElementAt(bottomRight) != null) {
+            else if (canvas.getElementAt(bottomRight) != null &&
+                    canvas.getElementAt(bottomRight) instanceof Platform) {
                 return bottomRight;
             }
         }

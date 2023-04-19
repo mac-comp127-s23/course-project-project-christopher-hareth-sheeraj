@@ -22,7 +22,7 @@ public class DoodleJumpGame {
         canvas = new CanvasWindow("Doodle Jump", CANVAS_WIDTH, CANVAS_HEIGHT);
         background = new GameFrame();
         canvas.add(background.BackgroundCreater());
-        
+
         run();
     }
 
@@ -43,7 +43,6 @@ public class DoodleJumpGame {
     public void moveCharacter() {
         character.updateHeight(DT);
         Set<Key> keys = canvas.getKeysPressed();
-        System.out.println(keys);
         if (keys.contains(Key.LEFT_ARROW)) {
             character.updateHorizontalPosition(-CHARACTER_HORIZ_VELOCITY);
         }
