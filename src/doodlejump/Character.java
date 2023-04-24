@@ -15,18 +15,22 @@ public class Character extends Image{
     
     private double centerX, centerY;
     private double currentVelocity;
+    private double maxXBound, maxYBound;
 
     private boolean falling;
 
     private CanvasWindow canvas;
 
 
-    public Character(double centerX, double centerY, CanvasWindow canvas) {
+    public Character(double centerX, double centerY, double maxXBound, double maxYBound, CanvasWindow canvas) {
         super(IMAGE_PATH);
 
         this.centerX = centerX;
         this.centerY = centerY;
         this.canvas = canvas;
+
+        this.maxXBound = maxXBound;
+        this.maxYBound = maxYBound;
 
         currentVelocity = STARTING_VELOCITY;
         
@@ -35,21 +39,46 @@ public class Character extends Image{
         updateCharacterPos();
     }
 
+    public double getCurrentVelocity() {
+        return currentVelocity;
+    }
+
     public void updateHeight(double dt) {
-        double newHeight = centerY - (currentVelocity * dt);
-        centerY = newHeight;
+        if ((int) this.getCenter().getY() >= (int) maxYBound) {
+            double newHeight = centerY - (currentVelocity * dt);
+            centerY = newHeight;
+        }
         currentVelocity -= (GRAVITY * dt);
         if (currentVelocity < 0) {
             falling = true;
+            centerY -= (currentVelocity  * dt);
         }
+
         updateCharacterPos();
     }
 
     public void updateHorizontalPosition(double dt) {
-        double newHorizPos = centerX + dt;
-        centerX = newHorizPos;
+        double newCenterX = centerX + dt;
+
+        if (newCenterX + (getImageWidth() / 2) >= maxXBound) {
+            newCenterX = getImageWidth() / 2;
+        }
+        else if (newCenterX - (getImageWidth() / 2) <= 0) {
+            newCenterX = maxXBound - (getImageWidth() / 2);
+        }
+
+        centerX = newCenterX;
         updateCharacterPos();
     }
+
+    public boolean checkIfFalling() {
+        return falling;
+    }
+
+    public boolean checkIfHitsBounds() {
+        return (int) getCenter().getY() <= (int) this.maxYBound;
+    }
+
 
     public Point checkForPlatforms() {
         if (falling) {

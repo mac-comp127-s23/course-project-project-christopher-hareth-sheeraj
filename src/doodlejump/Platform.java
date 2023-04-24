@@ -6,9 +6,25 @@ public class Platform extends Image{
 
     private static String IMAGE_PATH = "platform_test.png";
 
-    public Platform(double centerX, double centerY) {
-        super(IMAGE_PATH);
-        setCenter(centerX, centerY);
+    private double startX, startY;
+
+    public Platform(double startX, double startY) {
+        super(startX, startY, IMAGE_PATH);
+        this.startX = startX;
+        this.startY = startY;
+    }
+
+    public double getStartX() {
+        return startX;
+    }
+
+    public double getStartY() {
+        return startY;
+    }
+
+    public void updatePosition(double newX, double newY) {
+        this.startX = newX;
+        this.startY = newY;
     }
 
     @Override
