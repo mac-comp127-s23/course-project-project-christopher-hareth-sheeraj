@@ -42,7 +42,7 @@ public class DoodleJumpGame {
             moveCharacter();
             scrollPlatforms();
             checkForCollision();
-            checkGameState();
+            // checkGameState();
         });
     }
 
