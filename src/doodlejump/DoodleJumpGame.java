@@ -19,7 +19,7 @@ public class DoodleJumpGame {
     private CanvasWindow canvas;
     private Character character;
     private PlatformManager platformManager;
-    private Image background; 
+    private Image background;
 
     public DoodleJumpGame() {
         canvas = new CanvasWindow("Doodle Jump", CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -51,8 +51,7 @@ public class DoodleJumpGame {
         Set<Key> keys = canvas.getKeysPressed();
         if (keys.contains(Key.LEFT_ARROW)) {
             character.updateHorizontalPosition(-CHAR_HORIZ_VELOCITY);
-        }
-        else if (keys.contains(Key.RIGHT_ARROW)) {
+        } else if (keys.contains(Key.RIGHT_ARROW)) {
             character.updateHorizontalPosition(CHAR_HORIZ_VELOCITY);
         }
     }
@@ -72,7 +71,7 @@ public class DoodleJumpGame {
         }
     }
 
-    public void checkGameState() {
+    public void checkGameStatxe() {
         if (character.checkIfAtBottom()) {
             canvas.closeWindow();
         }
