@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import edu.macalester.graphics.*;
 
-public class PlatformManager{
+public class PlatformManager {
 
     private static final int STARTING_PLATFORMS = 8;
 
@@ -20,7 +20,7 @@ public class PlatformManager{
         this.canvas = canvas;
         canvasWidth = canvas.getWidth();
         canvasHeight = canvas.getHeight();
-        
+
         random = new Random();
     }
 
@@ -35,8 +35,8 @@ public class PlatformManager{
             double randomX = 0;
             double randomY = 0;
             do {
-            randomX = random.nextDouble(canvasWidth / 100, 80 * canvasWidth / 100);
-            randomY = random.nextDouble(canvasHeight / 12, 11 * canvasHeight / 12);
+                randomX = random.nextDouble(canvasWidth / 100, 80 * canvasWidth / 100);
+                randomY = random.nextDouble(canvasHeight / 12, 11 * canvasHeight / 12);
             } while (canvas.getElementAt(randomX, randomY) instanceof Platform);
             Platform platform = new Platform(randomX, randomY);
             platforms.add(platform);
@@ -45,7 +45,7 @@ public class PlatformManager{
     }
 
     public void updatePlatforms(double dt) {
-        if (random.nextInt(1, 10) == 1) {
+        if (random.nextInt(1, 20) == 1) {
             addNewPlatform();
         }
 
@@ -71,9 +71,9 @@ public class PlatformManager{
     private void addNewPlatform() {
         double randomX = random.nextDouble(canvasWidth / 100, 80 * canvasWidth / 100);
         Platform platform = new Platform(randomX, canvasHeight / 100);
-        
+
         platforms.add(platform);
         canvas.add(platform);
     }
-    
-}   
+
+}
