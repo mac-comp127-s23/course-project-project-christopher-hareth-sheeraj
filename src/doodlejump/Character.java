@@ -105,6 +105,7 @@ public class Character extends Image{
 
     private void updateCharacterPos() {
         setCenter(centerX, centerY);
+        // System.out.println(getCenter());
         bottomLeft = new Point(centerX - (getImageWidth() / 2) - 1, centerY + (getImageHeight() / 2) + 1);
         bottomRight = new Point(centerX + (getImageWidth() / 2) + 1, centerY + (getImageHeight() / 2) + 1);
     }
