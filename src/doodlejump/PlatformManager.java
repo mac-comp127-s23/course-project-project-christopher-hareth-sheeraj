@@ -7,6 +7,7 @@ import edu.macalester.graphics.*;
 public class PlatformManager {
 
     private static final int STARTING_PLATFORMS = 8;
+    private static final int MAX_GAP_BETWEEN_PLATFORMS = 150;
 
     private ArrayList<Platform> platforms;
     private CanvasWindow canvas;
@@ -22,6 +23,10 @@ public class PlatformManager {
         canvasHeight = canvas.getHeight();
 
         random = new Random();
+    }
+
+    public ArrayList<Platform> getPlatforms() {
+        return new ArrayList<Platform>(platforms);
     }
 
     public void createStartingPlatform(double centerX, double centerY) {
@@ -64,23 +69,8 @@ public class PlatformManager {
             platforms.remove(platform);
         }
 
-        if (random.nextInt(1, 30) == 1) {
+        if (platforms.get(platforms.size() - 1).getY() > MAX_GAP_BETWEEN_PLATFORMS) {
             addNewPlatform();
-        }
-
-        checkDistance();
-    }
-
-    private void checkDistance() {
-        for (int i = 0; i < platforms.size() - 1; i++) {
-            double yPositiona = platforms.get(i).getY();
-            double yPositionb = platforms.get(i + 1).getY();
-            if (yPositiona - yPositionb > 200) {
-                Platform newPlatform = platforms.get(i);
-                canvas.remove(newPlatform);
-                newPlatform.setCenter(newPlatform.getX(), yPositiona - 200);
-                canvas.add(newPlatform, newPlatform.getX(), newPlatform.getY());
-            }
         }
     }
 

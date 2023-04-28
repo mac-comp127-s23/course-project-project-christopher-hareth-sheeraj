@@ -11,7 +11,7 @@ public class DoodleJumpGame {
     private static final int CANVAS_WIDTH = 600;
     private static final int CANVAS_HEIGHT = 800;
     private static final double DT = 0.2;
-    private static final double CHAR_HORIZ_VELOCITY = 3;
+    private static final double CHAR_HORIZ_VELOCITY = 5;
     private static final double CHAR_UPPER_BOUND = 300;
 
     private static String backgroundPath = "Background.png";
@@ -42,7 +42,7 @@ public class DoodleJumpGame {
             moveCharacter();
             scrollPlatforms();
             checkForCollision();
-            // checkGameState();
+            checkGameState();
         });
     }
 
@@ -71,7 +71,7 @@ public class DoodleJumpGame {
         }
     }
 
-    public void checkGameStatxe() {
+    public void checkGameState() {
         if (character.checkIfAtBottom()) {
             canvas.closeWindow();
         }
