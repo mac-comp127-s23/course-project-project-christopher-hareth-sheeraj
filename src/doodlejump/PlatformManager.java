@@ -45,7 +45,7 @@ public class PlatformManager {
     }
 
     public void updatePlatforms(double dt) {
-        if (random.nextInt(1, 20) == 1) {
+        if (random.nextInt(1, 30) == 1) {
             addNewPlatform();
         }
 
@@ -63,8 +63,24 @@ public class PlatformManager {
         for (Platform platform : removeablePlatforms) {
             platforms.remove(platform);
         }
-        if (random.nextInt(1, 10) == 1) {
+
+        if (random.nextInt(1, 30) == 1) {
             addNewPlatform();
+        }
+
+        checkDistance();
+    }
+
+    private void checkDistance() {
+        for (int i = 0; i < platforms.size() - 1; i++) {
+            double yPositiona = platforms.get(i).getY();
+            double yPositionb = platforms.get(i + 1).getY();
+            if (yPositiona - yPositionb > 200) {
+                Platform newPlatform = platforms.get(i);
+                canvas.remove(newPlatform);
+                newPlatform.setCenter(newPlatform.getX(), yPositiona - 200);
+                canvas.add(newPlatform, newPlatform.getX(), newPlatform.getY());
+            }
         }
     }
 
