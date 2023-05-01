@@ -22,6 +22,14 @@ public class Platform extends Image{
         return startY;
     }
 
+    public static double getPlatformWidth() {
+        return new Image(IMAGE_PATH).getWidth();
+    }
+
+    public static double getPlatformHeight() {
+        return new Image(IMAGE_PATH).getHeight();
+    }
+
     public void updatePosition(double newX, double newY) {
         this.startX = newX;
         this.startY = newY;
