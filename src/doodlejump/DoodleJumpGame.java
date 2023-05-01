@@ -6,6 +6,7 @@ import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Point;
 import edu.macalester.graphics.events.Key;
+import edu.macalester.graphics.GraphicsText;
 
 public class DoodleJumpGame {
     private static final int CANVAS_WIDTH = 600;
@@ -16,35 +17,45 @@ public class DoodleJumpGame {
     private static final double CHAR_UPPER_BOUND = 300;
 
     private static String backgroundPath = "Background.png";
-
+    
     private CanvasWindow canvas;
     private Character character;
     private PlatformManager platformManager;
+    private int score;
+    private GraphicsText scoreText;
     private Image background;
 
     public DoodleJumpGame() {
         canvas = new CanvasWindow("Doodle Jump", CANVAS_WIDTH, CANVAS_HEIGHT);
         background = new Image(backgroundPath);
         canvas.add(background);
-
+        
         run();
     }
 
     public void run() {
-        character = new Character(300, 500, CANVAS_WIDTH, CHAR_UPPER_BOUND, canvas);
-        platformManager = new PlatformManager(canvas);
-
-        canvas.add(character);
-
-        platformManager.createStartingPlatform(200, 700);
-        platformManager.generateRandomPlatforms();
-
+        setUpGame();
         canvas.animate(() -> {
             moveCharacter();
             scrollPlatforms();
             checkForCollision();
             checkGameState();
         });
+    }
+
+    public void setUpGame() {
+        character = new Character(300, 500, CANVAS_WIDTH, CHAR_UPPER_BOUND, canvas);
+        platformManager = new PlatformManager(canvas);
+
+        canvas.add(character);
+        
+        platformManager.createStartingPlatform(200, 700);
+        platformManager.generateRandomPlatforms();
+        
+        score = 0;
+        scoreText = new GraphicsText("Score: " + score, 20, 25);
+        scoreText.setFontSize(20);
+        canvas.add(scoreText);
     }
 
     public void moveCharacter() {
@@ -60,6 +71,7 @@ public class DoodleJumpGame {
     public void scrollPlatforms() {
         if (character.checkIfHitsBounds()) {
             platformManager.updatePlatforms(character.getCurrentVelocity() / 2);
+            updateScore(1);
         }
     }
 
@@ -76,6 +88,11 @@ public class DoodleJumpGame {
         if (character.checkIfAtBottom()) {
             canvas.closeWindow();
         }
+    }
+
+    private void updateScore(int points) {
+        score += points;
+        scoreText.setText("Score: " + score);
     }
 
 
