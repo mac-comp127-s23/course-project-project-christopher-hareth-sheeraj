@@ -26,11 +26,15 @@ public class DoodleJumpGame {
         setUpGame();
     }
 
-    public boolean run() {
+    public String run() {
         moveCharacter();
         scrollPlatforms();
         checkForCollision();
         return checkGameState();
+    }
+
+    public int getScore() {
+        return score;
     }
 
     private void setUpGame() {
@@ -40,6 +44,7 @@ public class DoodleJumpGame {
         canvas.add(character);
         
         platformManager.createStartingPlatform(200, 700);
+        platformManager.createStartingPlatform(300, 500);
         platformManager.generateRandomPlatforms();
         
         score = 0;
@@ -79,12 +84,12 @@ public class DoodleJumpGame {
         }
     }
 
-    private boolean checkGameState() {
+    private String checkGameState() {
         if (character.checkIfAtBottom()) {
-            return true;
+            return "Game is done";
         }
         else {
-            return false;
+            return "Continue";
         }
     }
 }

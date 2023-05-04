@@ -6,7 +6,7 @@ import edu.macalester.graphics.*;
 
 public class PlatformManager {
 
-    private static final int STARTING_PLATFORMS = 8;
+    private static final int STARTING_PLATFORMS = 6;
     private static final int MAX_GAP_BETWEEN_PLATFORMS = 150;
 
     private ArrayList<Platform> platforms;
