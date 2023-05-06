@@ -6,6 +6,9 @@ import edu.macalester.graphics.Image;
 import edu.macalester.graphics.TextAlignment;
 import edu.macalester.graphics.ui.Button;
 
+/**
+ * Contains the necessary code to display and run a Doodle Jump Game.
+ */
 public class DoodleJump {
 
     private static final int CANVAS_WIDTH = 600;
@@ -20,6 +23,9 @@ public class DoodleJump {
 
     private int highScore;
 
+    /**
+     * Creates the Doodle Jump game window
+     */
     public DoodleJump() {
         canvas = new CanvasWindow("Doodle Jump", CANVAS_WIDTH, CANVAS_HEIGHT);
         background = new Image(IMAGE_PATH);
@@ -32,6 +38,9 @@ public class DoodleJump {
         new DoodleJump();
     }
 
+    /**
+     * Creates and displays a title screen on the game window
+     */
     private void titleScreen() {
         GraphicsText title = new GraphicsText("Doodle Jump");
         title.setFontSize(36);
@@ -51,6 +60,10 @@ public class DoodleJump {
         canvas.add(playButton);
     }
 
+    /**
+     * Runs the Doodle Jump game.
+     * When the game is over, a game over screen will be drawn.
+     */
     private void runGame() {
         resetGame();
         canvas.animate(() -> {
@@ -75,7 +88,12 @@ public class DoodleJump {
         });
     }
 
-    public void gameOverScreen(int score) {
+    /**
+     * Creates a game over screen, and displays the player's score.
+     * If the score is greater than their previous high score,
+     * the screen will show that it's a new high score.
+     */
+    private void gameOverScreen(int score) {
         GraphicsText gameOverText = new GraphicsText("Game Over");
         GraphicsText scoreText;
         if (score > highScore) {
@@ -114,6 +132,11 @@ public class DoodleJump {
     private void resetGame() {
         gameState = "Continue";
         doodleJumpGame = new DoodleJumpGame(canvas);
+    }
+
+    @Override
+    public String toString() {
+        return "A game of Doodle Jump. Status: " + gameState;
     }
 
 }

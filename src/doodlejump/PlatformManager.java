@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Random;
 import edu.macalester.graphics.*;
 
+/**
+ * A class that manages all platform objects being used in a Doodle Jump Game.
+ */
 public class PlatformManager {
 
     private static final int STARTING_PLATFORMS = 6;
@@ -15,6 +18,9 @@ public class PlatformManager {
 
     private double canvasWidth, canvasHeight;
 
+    /**
+     * Creates a platform manager for a specified window object.
+     */
     public PlatformManager(CanvasWindow canvas) {
         platforms = new ArrayList<>();
 
@@ -29,12 +35,19 @@ public class PlatformManager {
         return new ArrayList<Platform>(platforms);
     }
 
+    /**
+     * Creates a platform with its upper left corner at the specified position,
+     * and adds it to the game window.
+     */
     public void createStartingPlatform(double startX, double startY) {
         Platform platform = new Platform(startX, startY);
         platforms.add(platform);
         canvas.add(platform);
     }
 
+    /**
+     * Generates random starting platforms and places them on the canvas.
+     */
     public void generateRandomPlatforms() {
         for (int i = 0; i < STARTING_PLATFORMS; i++) {
             double randomY = random.nextDouble(canvasHeight / 12, 11 * canvasHeight / 12);
@@ -46,15 +59,21 @@ public class PlatformManager {
         }
     }
 
-    public void updatePlatforms(double dt) {
-        if (random.nextInt(1, 30) == 1) {
+    /**
+     * Updates the height of all platforms currently on the game window,
+     * and will sometimes generate new paltforms at the top.
+     * When a platform is completely off screen, it will be removed.
+     * @param distance
+     */
+    public void updatePlatforms(double distance) {
+        if (random.nextInt(1, 50) == 1) {
             addNewPlatform();
         }
 
         ArrayList<Platform> removeablePlatforms = new ArrayList<>();
         for (Platform platform : platforms) {
             canvas.remove(platform);
-            platform.updatePosition(platform.getStartX(), platform.getStartY() + dt);
+            platform.updatePosition(platform.getStartX(), platform.getStartY() + distance);
             canvas.add(platform, platform.getStartX(), platform.getStartY());
             if (platform.getY() > canvasHeight) {
                 removeablePlatforms.add(platform);
@@ -66,11 +85,13 @@ public class PlatformManager {
             platforms.remove(platform);
         }
 
-        if (platforms.get(platforms.size() - 1).getY() > MAX_GAP_BETWEEN_PLATFORMS) {
-            addNewPlatform();
-        }
+        checkDistanceBetweenPlatforms();
     }
 
+    /**
+     * Helper function that generates and returns a random x position such that 
+     * a platform placed at the point(randomX, randomY) would not overlap other platforms. 
+     */
     private double generateRandomX(double randomY) {
         double randomX;
         do {
@@ -83,6 +104,9 @@ public class PlatformManager {
         return randomX;
     }
 
+    /**
+     * Helper function that automatically adds a new platform onto the game window.
+     */
     private void addNewPlatform() {
         double randomX = generateRandomX(canvasWidth / 100);
         Platform platform = new Platform(randomX, canvasHeight / 100);
@@ -91,4 +115,19 @@ public class PlatformManager {
         canvas.add(platform);
     }
 
+    /**
+     * Helper function that checks the distance between 
+     * the last generated platform and the top of the screen, 
+     * and forces a new platform to generate if the distance between them is too large.
+     */
+    private void checkDistanceBetweenPlatforms() {
+        if (platforms.get(platforms.size() - 1).getY() > MAX_GAP_BETWEEN_PLATFORMS) {
+            addNewPlatform();
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "A platform manager, currently managing " + platforms.size() + " platforms.";
+    }
 }
