@@ -10,7 +10,7 @@ import edu.macalester.graphics.GraphicsText;
 /**
  * Contains the main game logic for a Doodle Jump Game
  */
-public class DoodleJumpGame {
+public class GameLogic {
     private static final double DT = 0.2;
     
     private static final double CHAR_HORIZ_VELOCITY = 5;
@@ -26,7 +26,7 @@ public class DoodleJumpGame {
     /**
      * Creates and sets up a new Doodle Jump game on the given game window
      */
-    public DoodleJumpGame(CanvasWindow canvas){
+    public GameLogic(CanvasWindow canvas){
         this.canvas = canvas;
 
         setUpGame();
@@ -61,6 +61,7 @@ public class DoodleJumpGame {
         
         platformManager.createStartingPlatform(200, 700);
         platformManager.createStartingPlatform(300, 500);
+        platformManager.createStartingPlatform(400, 300);
         platformManager.generateRandomPlatforms();
         
         score = 0;
@@ -75,9 +76,9 @@ public class DoodleJumpGame {
     private void moveCharacter() {
         character.updateHeight(DT);
         Set<Key> keys = canvas.getKeysPressed();
-        if (keys.contains(Key.LEFT_ARROW)) {
+        if (keys.contains(Key.LEFT_ARROW) || keys.contains(Key.A)) {
             character.updateHorizontalPosition(-CHAR_HORIZ_VELOCITY);
-        } else if (keys.contains(Key.RIGHT_ARROW)) {
+        } else if (keys.contains(Key.RIGHT_ARROW) || keys.contains(Key.D)) {
             character.updateHorizontalPosition(CHAR_HORIZ_VELOCITY);
         }
     }

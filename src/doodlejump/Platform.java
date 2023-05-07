@@ -7,7 +7,7 @@ import edu.macalester.graphics.Image;
  */
 public class Platform extends Image{
 
-    private static String IMAGE_PATH = "platform_test.png";
+    private static String IMAGE_PATH = "Platform.png";
 
     private double startX, startY;
 
@@ -36,6 +36,9 @@ public class Platform extends Image{
         return new Image(IMAGE_PATH).getHeight();
     }
 
+    /**
+     * Updates the platform's upper left corner to the new indicated position
+     */
     public void updatePosition(double newX, double newY) {
         this.startX = newX;
         this.startY = newY;

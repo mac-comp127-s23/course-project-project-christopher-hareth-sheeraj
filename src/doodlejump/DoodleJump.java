@@ -18,7 +18,7 @@ public class DoodleJump {
 
     private Image background;
     private CanvasWindow canvas;
-    private DoodleJumpGame doodleJumpGame;
+    private GameLogic gameLogic;
     private String gameState;
 
     private int highScore;
@@ -29,6 +29,7 @@ public class DoodleJump {
     public DoodleJump() {
         canvas = new CanvasWindow("Doodle Jump", CANVAS_WIDTH, CANVAS_HEIGHT);
         background = new Image(IMAGE_PATH);
+        background.setScale(1.5);
         canvas.add(background);
         highScore = 0;
         titleScreen();
@@ -69,13 +70,13 @@ public class DoodleJump {
         canvas.animate(() -> {
             switch(gameState) {
                 case ("Continue"): {
-                    gameState = doodleJumpGame.run();
+                    gameState = gameLogic.run();
                     break;
                 }
                 case ("Game is done"): {
-                    gameState = "Game Over";
-                    int score = doodleJumpGame.getScore();
-                    doodleJumpGame = null;
+                    gameState = "stopped";
+                    int score = gameLogic.getScore();
+                    gameLogic = null;
                     canvas.removeAll();
                     canvas.add(background);
                     gameOverScreen(score);
@@ -131,7 +132,7 @@ public class DoodleJump {
 
     private void resetGame() {
         gameState = "Continue";
-        doodleJumpGame = new DoodleJumpGame(canvas);
+        gameLogic = new GameLogic(canvas);
     }
 
     @Override

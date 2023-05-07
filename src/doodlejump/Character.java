@@ -12,7 +12,7 @@ public class Character extends Image{
     private static final double GRAVITY = 9.8;
     private static final double STARTING_VELOCITY = 65;
 
-    private static String IMAGE_PATH = "character_test.png";
+    private static String IMAGE_PATH = "Character.png";
     
     private Point bottomLeft, bottomRight;
     
@@ -113,11 +113,11 @@ public class Character extends Image{
         if (falling) {
             if (canvas.getElementAt(bottomLeft) != null && 
                 canvas.getElementAt(bottomLeft) instanceof Platform) {
-                return bottomLeft;
+                return new Point(bottomLeft.getX(), bottomLeft.getY());
             }
             else if (canvas.getElementAt(bottomRight) != null &&
                     canvas.getElementAt(bottomRight) instanceof Platform) {
-                return bottomRight;
+                return new Point(bottomRight.getX(), bottomRight.getY());
             }
         }
         return null;
