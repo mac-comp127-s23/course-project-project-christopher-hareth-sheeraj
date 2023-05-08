@@ -25,7 +25,7 @@ public class Character extends Image{
     private CanvasWindow canvas;
 
     /**
-     * Creates a character sprite, centered at the indicated position
+     * Creates a character sprite, centered at the indicated position.
      * @param maxXBound The farthest value the character can go horizontally while staying on screen
      * @param maxYBound How high up the character should be allowed to go to
      * @param canvas The game window the character will reside in

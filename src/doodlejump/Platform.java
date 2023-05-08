@@ -37,7 +37,7 @@ public class Platform extends Image{
     }
 
     /**
-     * Updates the platform's upper left corner to the new indicated position
+     * Updates the platform's upper left corner to the new indicated position.
      */
     public void updatePosition(double newX, double newY) {
         this.startX = newX;

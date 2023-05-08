@@ -139,5 +139,4 @@ public class DoodleJump {
     public String toString() {
         return "A game of Doodle Jump. Status: " + gameState;
     }
-
 }

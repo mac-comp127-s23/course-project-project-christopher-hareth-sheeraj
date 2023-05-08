@@ -5,7 +5,7 @@ import java.util.Random;
 import edu.macalester.graphics.*;
 
 /**
- * A class that manages all platform objects being used in a Doodle Jump Game.
+ * A class that manages all platform objects being used in a Doodle Jump Game. 
  */
 public class PlatformManager {
 

@@ -96,7 +96,7 @@ public class GameLogic {
     }
 
     /**
-     * Updates and displays the current amount of points accumulated
+     * Updates and displays the current amount of points accumulated.
      */
     private void updateScore(int points) {
         score += points;
